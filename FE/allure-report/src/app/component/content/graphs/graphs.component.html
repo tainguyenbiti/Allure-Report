@@ -1,0 +1,111 @@
+<div class="widgets-grid">
+    <div class="widgets-grid__col">
+        <div class="widget island">
+            <div class="widget__title">
+                <h2>STATUS</h2>
+            </div>
+            <div class="widget__content-chart">
+                <ng-container *ngIf="true; else statusTemplate">
+                    <app-doughnut></app-doughnut>
+                </ng-container>
+                <ng-template #statusTemplate>
+                    <div style="padding-top: 50%; text-align: center">
+                        There is nothing to show
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="widget island">
+            <div class="widget__title">
+                <h2>DURATION</h2>
+            </div>
+            <div class="widget__content-chart">
+                <ng-container *ngIf="true; else statusTemplate">
+
+                </ng-container>
+                <ng-template #statusTemplate>
+                    <div style="padding-top: 50%; text-align: center">
+                        There is nothing to show
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="widget island">
+            <div class="widget__title">
+                <h2>RETRIES TREND</h2>
+            </div>
+            <div class="widget__content-chart">
+                <ng-container *ngIf="false; else statusTemplate">
+
+                </ng-container>
+                <ng-template #statusTemplate>
+                    <div style="padding-top: 50%; text-align: center">
+                        There is nothing to show
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="widget island">
+            <div class="widget__title">
+                <h2>TREND</h2>
+            </div>
+            <div class="widget__content-chart">
+                <ng-container *ngIf="false; else statusTemplate">
+
+                </ng-container>
+                <ng-template #statusTemplate>
+                    <div style="padding-top: 50%; text-align: center">
+                        There is nothing to show
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="widgets-grid__col">
+        <div class="widget island">
+            <div class="widget__title">
+                <h2>SEVERITY</h2>
+            </div>
+            <div class="widget__content-chart">
+                <ng-container *ngIf="true; else statusTemplate">
+
+                </ng-container>
+                <ng-template #statusTemplate>
+                    <div style="padding-top: 50%; text-align: center">
+                        There is nothing to show
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="widget island">
+            <div class="widget__title">
+                <h2>DURATION TREND</h2>
+            </div>
+            <div class="widget__content-chart">
+                <ng-container *ngIf="false; else statusTemplate">
+
+                </ng-container>
+                <ng-template #statusTemplate>
+                    <div style="padding-top: 50%; text-align: center">
+                        There is nothing to show
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="widget island">
+            <div class="widget__title">
+                <h2>CATEGORIES TREND</h2>
+            </div>
+            <div class="widget__content-chart">
+                <ng-container *ngIf="false; else statusTemplate">
+
+                </ng-container>
+                <ng-template #statusTemplate>
+                    <div style="padding-top: 50%; text-align: center">
+                        There is nothing to show
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

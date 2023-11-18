@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Nov 15 16:12:03 ICT 2023","Wed Nov 15 16:12:03 ICT 2023","338","Default Suite","TestNG","com.example.testng.ExcelTest.ExcelTest","com.example.testng.ExcelTest.ExcelTest","getTeamMember","getTeamMember",""
+"passed","Wed Nov 15 16:11:59 ICT 2023","Wed Nov 15 16:12:03 ICT 2023","3419","Default Suite","TestNG","com.example.testng.ExcelTest.ExcelTest","com.example.testng.ExcelTest.ExcelTest","teamMembers","Choose team members",""
+"passed","Wed Nov 15 16:11:47 ICT 2023","Wed Nov 15 16:11:47 ICT 2023","5","Default Suite","TestNG","com.example.testng.ExcelTest.ExcelTest","com.example.testng.ExcelTest.ExcelTest","yourTest","yourTest",""
+"passed","Wed Nov 15 16:11:47 ICT 2023","Wed Nov 15 16:11:59 ICT 2023","12678","Default Suite","TestNG","com.example.testng.ExcelTest.ExcelTest","com.example.testng.ExcelTest.ExcelTest","login","Login",""
+"failed","Wed Nov 15 16:12:03 ICT 2023","Wed Nov 15 16:12:06 ICT 2023","2587","Default Suite","TestNG","com.example.testng.ExcelTest.ExcelTest","com.example.testng.ExcelTest.ExcelTest","readExcelFromResult","readExcelFromResult",""

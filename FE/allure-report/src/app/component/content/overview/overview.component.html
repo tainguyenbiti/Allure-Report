@@ -1,0 +1,174 @@
+<div class="widgets-grid">
+    <div class="widgets-grid__col">
+        <div class="widget-island">
+            <div class="widget__flex-line">
+                <div class="widget__column">
+                    <div class="widget__title">
+                        <h2>ALLURE REPORT</h2>
+                    </div>
+                    <div class="summary-widget__stats">
+                        <p class="summary-widget__stats-text">5</p>
+                        <p>Test case</p>
+                    </div>
+                </div>
+                <div class="widget__column summary-widget__chart">
+                    <app-doughnut></app-doughnut>
+                </div>
+            </div>
+        </div>
+        <div class="widget-island">
+            <div class="widget__line">
+                <div class="widget__title">
+                    <h2>SUITES</h2>
+                    <span>{{totalItems}} items total</span>
+                </div>
+                <div class="widget__table">
+                    <div class="table__row" *ngFor="let item of items">
+                        <div class="table__col">{{item.name}}</div>
+                        <div class="table__col">
+                            <span *ngIf="item.statistic.broken != 0"
+                                [style]="{'background-color': 'yellow', 'width': (item.statistic.broken / item.statistic.total * 100) + '%'}">{{item.statistic.broken}}</span>
+                            <span *ngIf="item.statistic.failed != 0"
+                                [style]="{'background-color': 'red', 'width': (item.statistic.failed / item.statistic.total * 100) + '%'}">{{item.statistic.failed}}</span>
+                            <span *ngIf="item.statistic.passed != 0"
+                                [style]="{'background-color': 'green', 'width': (item.statistic.passed / item.statistic.total * 100) + '%'}">{{item.statistic.passed}}</span>
+                            <span *ngIf="item.statistic.skipped != 0"
+                                [style]="{'background-color': 'gray', 'width': (item.statistic.skipped / item.statistic.total * 100) + '%'}">{{item.statistic.skipped}}</span>
+                        </div>
+                    </div>
+                    <div class="table__row">Show all</div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-island">
+            <div class="widget__line">
+                <div class="widget__title">
+                    <h2>ENVIRONMENT</h2>
+                </div>
+                <div class="widget__table">
+                    <ng-container
+                        *ngIf="environment !== null && environment !== undefined && environment.length !==0; else environmentTemplate">
+                        <div class="table__row" *ngFor="let item of environment">
+                            <div class="table__col">{{item.name}}</div>
+                            <div class="table__col">
+                                {{item.value}}
+                            </div>
+                        </div>
+                        <div class="table__row">Show all</div>
+                    </ng-container>
+                    <ng-template #environmentTemplate>
+                        <div class="table__row">
+                            There are no environment variables
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="widget-island">
+            <div class="widget__line">
+                <div class="widget__title">
+                    <h2>FEATURES BY STORIES</h2>
+                    <span *ngIf="behaviors !== null && behaviors !== undefined">{{ behaviors.total }} items
+                        total</span>
+                </div>
+                <div class="widget__table">
+                    <ng-container *ngIf="behaviors; else behaviorsTemplate">
+                        <ng-container *ngIf="behaviors.items">
+                            <div class="table__row" *ngFor="let item of behaviors.items">
+                                <div class="table__col">{{item.name}}</div>
+                                <div class="table__col">
+                                    <span *ngIf="item.statistic.broken != 0"
+                                        [style]="{'background-color': 'yellow', 'width': (item.statistic.broken / item.statistic.total * 100) + '%'}">{{item.statistic.broken}}</span>
+                                    <span *ngIf="item.statistic.failed != 0"
+                                        [style]="{'background-color': 'red', 'width': (item.statistic.failed / item.statistic.total * 100) + '%'}">{{item.statistic.failed}}</span>
+                                    <span *ngIf="item.statistic.passed != 0"
+                                        [style]="{'background-color': 'green', 'width': (item.statistic.passed / item.statistic.total * 100) + '%'}">{{item.statistic.passed}}</span>
+                                    <span *ngIf="item.statistic.skipped != 0"
+                                        [style]="{'background-color': 'gray', 'width': (item.statistic.skipped / item.statistic.total * 100) + '%'}">{{item.statistic.skipped}}</span>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="table__row">Show all</div>
+                    </ng-container>
+                    <ng-template #behaviorsTemplate>
+                        <div class="table__row">
+                            There are no behaviors variables
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="widgets-grid__col">
+        <div class="widget-island">
+            <div class="widget__line">
+                <div class="widget__title">
+                    <h2>TREND</h2>
+                </div>
+                <div class="history-trend__chart">
+                    <div>
+                        <app-line></app-line>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-island">
+            <div class="widget__line">
+                <div class="widget__title">
+                    <h2>CATEGORIES</h2>
+                    <span *ngIf="categories !== null && categories !== undefined">{{ categories.total }} items
+                        total</span>
+                </div>
+                <div class="widget__table">
+                    <ng-container *ngIf="categories; else categoriesTemplate">
+                        <ng-container *ngIf="categories.items">
+                            <div class="table__row" *ngFor="let item of categories.items">
+                                <div class="table__col">{{item.name}}</div>
+                                <div class="table__col">
+                                    <span *ngIf="item.statistic.broken != 0"
+                                        [style]="{'background-color': 'yellow', 'width': (item.statistic.broken / item.statistic.total * 100) + '%'}">{{item.statistic.broken}}</span>
+                                    <span *ngIf="item.statistic.failed != 0"
+                                        [style]="{'background-color': 'red', 'width': (item.statistic.failed / item.statistic.total * 100) + '%'}">{{item.statistic.failed}}</span>
+                                    <span *ngIf="item.statistic.passed != 0"
+                                        [style]="{'background-color': 'green', 'width': (item.statistic.passed / item.statistic.total * 100) + '%'}">{{item.statistic.passed}}</span>
+                                    <span *ngIf="item.statistic.skipped != 0"
+                                        [style]="{'background-color': 'gray', 'width': (item.statistic.skipped / item.statistic.total * 100) + '%'}">{{item.statistic.skipped}}</span>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="table__row">Show all</div>
+                    </ng-container>
+                    <ng-template #categoriesTemplate>
+                        <div class="table__row">
+                            There are no categories variables
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="widget-island">
+            <div class="widget__line">
+                <div class="widget__title">
+                    <h2>EXECUTORS</h2>
+                </div>
+                <div class="widget__table">
+                    <ng-container
+                        *ngIf="executors !== null && executors !== undefined && executors.length != 0; else executorsTemplate">
+                        <div class="table__row" *ngFor="let item of executors">
+                            <div class="table__col">{{item.name}}</div>
+                            <div class="table__col">
+                                {{item.buildName}}
+                            </div>
+                        </div>
+                        <div class="table__row">Show all</div>
+                    </ng-container>
+                    <ng-template #executorsTemplate>
+                        <div class="table__row">
+                            There are no executors variables
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

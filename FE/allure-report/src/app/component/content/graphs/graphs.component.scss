@@ -1,0 +1,11 @@
+.widgets-grid {
+  display: flex;
+  .widgets-grid__col {
+    width: 50%;
+    .island {
+      border: 1px solid #e0e4e8;
+      margin: 10px 10px 0;
+      padding: 10px 10px 0;
+    }
+  }
+}

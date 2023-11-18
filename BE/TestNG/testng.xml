@@ -1,0 +1,13 @@
+
+
+<suite name="YourTestSuite">
+<test name="TestWithCustomSidebarItem">
+    <parameter name="customItemName" value="Custom Item Name" />
+    <parameter name="customItemUrl" value="http://example.com/custom-item" />
+    <classes>
+        <class name="com.example.testng.ExcelTest.ExcelTest" />
+    </classes>
+</test>
+<!-- Other test configurations -->
+</suite>
+

@@ -1,0 +1,61 @@
+.widgets-grid {
+  display: flex;
+  .widgets-grid__col {
+    width: 50%;
+    .widget-island {
+      background: #fff;
+      border: 1px solid #e0e4e8;
+      margin: 10px 10px 0;
+      padding: 10px 10px 0;
+
+      .widget__flex-line {
+        display: flex;
+        .summary-widget__stats {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          height: 30vh;
+          padding-top: 10px;
+          &-text {
+            padding: 10px 0px;
+            font-size: 3.5rem;
+          }
+        }
+        .history-trend__chart {
+          div {
+            padding-top: 50%;
+          }
+        }
+        .widget__column {
+          width: 50%;
+        }
+      }
+      .widget__line {
+        .widget__title {
+          display: flex;
+          ::after {
+            content: "\00a0";
+            display: inline-block;
+            width: 10px;
+          }
+        }
+        .table__row {
+          display: flex;
+          justify-content: center;
+          padding: 10px 0px;
+          .table__col {
+            width: 50%;
+            display: flex;
+            border-radius: 5px;
+            overflow: hidden;
+            span {
+              color: white;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@
                         <h2>ALLURE REPORT</h2>
                     </div>
                     <div class="summary-widget__stats">
-                        <p class="summary-widget__stats-text">5</p>
+                        <p class="summary-widget__stats-text">{{statistic?.total}}</p>
                         <p>Test case</p>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
             <div class="widget__line">
                 <div class="widget__title">
                     <h2>SUITES</h2>
-                    <span>{{totalItems}} items total</span>
+                    <span>{{statistic?.total}} items total</span>
                 </div>
                 <div class="widget__table">
                     <div class="table__row" *ngFor="let item of items">
@@ -29,9 +29,9 @@
                             <span *ngIf="item.statistic.broken != 0"
                                 [style]="{'background-color': 'yellow', 'width': (item.statistic.broken / item.statistic.total * 100) + '%'}">{{item.statistic.broken}}</span>
                             <span *ngIf="item.statistic.failed != 0"
-                                [style]="{'background-color': 'red', 'width': (item.statistic.failed / item.statistic.total * 100) + '%'}">{{item.statistic.failed}}</span>
+                                [style]="{'background-color': '#FD725A', 'width': (item.statistic.failed / item.statistic.total * 100) + '%'}">{{item.statistic.failed}}</span>
                             <span *ngIf="item.statistic.passed != 0"
-                                [style]="{'background-color': 'green', 'width': (item.statistic.passed / item.statistic.total * 100) + '%'}">{{item.statistic.passed}}</span>
+                                [style]="{'background-color': '#A6D37B', 'width': (item.statistic.passed / item.statistic.total * 100) + '%'}">{{item.statistic.passed}}</span>
                             <span *ngIf="item.statistic.skipped != 0"
                                 [style]="{'background-color': 'gray', 'width': (item.statistic.skipped / item.statistic.total * 100) + '%'}">{{item.statistic.skipped}}</span>
                         </div>
@@ -80,9 +80,9 @@
                                     <span *ngIf="item.statistic.broken != 0"
                                         [style]="{'background-color': 'yellow', 'width': (item.statistic.broken / item.statistic.total * 100) + '%'}">{{item.statistic.broken}}</span>
                                     <span *ngIf="item.statistic.failed != 0"
-                                        [style]="{'background-color': 'red', 'width': (item.statistic.failed / item.statistic.total * 100) + '%'}">{{item.statistic.failed}}</span>
+                                        [style]="{'background-color': '#FD725A', 'width': (item.statistic.failed / item.statistic.total * 100) + '%'}">{{item.statistic.failed}}</span>
                                     <span *ngIf="item.statistic.passed != 0"
-                                        [style]="{'background-color': 'green', 'width': (item.statistic.passed / item.statistic.total * 100) + '%'}">{{item.statistic.passed}}</span>
+                                        [style]="{'background-color': '#A6D37B', 'width': (item.statistic.passed / item.statistic.total * 100) + '%'}">{{item.statistic.passed}}</span>
                                     <span *ngIf="item.statistic.skipped != 0"
                                         [style]="{'background-color': 'gray', 'width': (item.statistic.skipped / item.statistic.total * 100) + '%'}">{{item.statistic.skipped}}</span>
                                 </div>
@@ -106,9 +106,7 @@
                     <h2>TREND</h2>
                 </div>
                 <div class="history-trend__chart">
-                    <div>
-                        <app-line></app-line>
-                    </div>
+                    <app-severity></app-severity>
                 </div>
             </div>
         </div>
@@ -128,9 +126,9 @@
                                     <span *ngIf="item.statistic.broken != 0"
                                         [style]="{'background-color': 'yellow', 'width': (item.statistic.broken / item.statistic.total * 100) + '%'}">{{item.statistic.broken}}</span>
                                     <span *ngIf="item.statistic.failed != 0"
-                                        [style]="{'background-color': 'red', 'width': (item.statistic.failed / item.statistic.total * 100) + '%'}">{{item.statistic.failed}}</span>
+                                        [style]="{'background-color': '#FD725A', 'width': (item.statistic.failed / item.statistic.total * 100) + '%'}">{{item.statistic.failed}}</span>
                                     <span *ngIf="item.statistic.passed != 0"
-                                        [style]="{'background-color': 'green', 'width': (item.statistic.passed / item.statistic.total * 100) + '%'}">{{item.statistic.passed}}</span>
+                                        [style]="{'background-color': '#A6D37B', 'width': (item.statistic.passed / item.statistic.total * 100) + '%'}">{{item.statistic.passed}}</span>
                                     <span *ngIf="item.statistic.skipped != 0"
                                         [style]="{'background-color': 'gray', 'width': (item.statistic.skipped / item.statistic.total * 100) + '%'}">{{item.statistic.skipped}}</span>
                                 </div>

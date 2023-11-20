@@ -20,10 +20,10 @@
                 <h2>DURATION</h2>
             </div>
             <div class="widget__content-chart">
-                <ng-container *ngIf="true; else statusTemplate">
-
+                <ng-container *ngIf="true; else durationTemplate">
+                    <app-duration></app-duration>
                 </ng-container>
-                <ng-template #statusTemplate>
+                <ng-template #durationTemplate>
                     <div style="padding-top: 50%; text-align: center">
                         There is nothing to show
                     </div>
@@ -68,7 +68,7 @@
             </div>
             <div class="widget__content-chart">
                 <ng-container *ngIf="true; else statusTemplate">
-
+                    <app-severity></app-severity>
                 </ng-container>
                 <ng-template #statusTemplate>
                     <div style="padding-top: 50%; text-align: center">

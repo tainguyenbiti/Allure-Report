@@ -1,1 +1,9 @@
-<p>severity works!</p>
+<ng-container
+    *ngIf="historyTrends !== null && historyTrends !== undefined && historyTrends.length > 1; else statusTemplate">
+    <app-severity></app-severity>
+</ng-container>
+<ng-template #statusTemplate>
+    <div style="padding-top: 50%; text-align: center">
+        There is nothing to show
+    </div>
+</ng-template>

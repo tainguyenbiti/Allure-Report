@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import Chart from 'chart.js/auto';
 import { IStatistic } from 'src/app/model/statistic';
 import { WidgetsService } from 'src/app/service/widgets.service';
 
@@ -7,49 +8,70 @@ import { WidgetsService } from 'src/app/service/widgets.service';
   templateUrl: './doughnut.component.html',
   styleUrls: ['./doughnut.component.scss']
 })
-
 export class DoughnutComponent {
-  statistic!: IStatistic;
-  data: any;
-  options: any;
-  plugin: any;
+  public chart: any;
+  public statistic!: IStatistic;
+
   constructor(private widgetsService: WidgetsService) { }
+
   ngOnInit(): void {
     this.widgetsService.getData('summary').subscribe(
       (response: any) => {
         this.statistic = response.statistic;
-        this.getChart();
+        this.createChart();
       },
       (error) => {
+        console.error('Message' + error);
       }
-    )
-  }
-  getChart() {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    this.data = {
-      datasets: [
-        {
-          data: [this.statistic.failed, this.statistic.broken, this.statistic.passed, this.statistic.skipped],
-          backgroundColor: [documentStyle.getPropertyValue('--red-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500'), documentStyle.getPropertyValue('--gray-500')],
-          hoverBackgroundColor: [documentStyle.getPropertyValue('--red-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400'), documentStyle.getPropertyValue('--gray-400')]
-        }
-      ]
-    };
-    this.options = {
-      cutout: '80%',
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor
-          }
-        },
-        title: {
-          display: true,
-          align: 'center'
-        }
-      }
-    };
+    );
   }
 
+  createChart() {
+    const component = this; // Create a reference to the component
+    this.chart = new Chart("Status", {
+      type: 'doughnut',
+      data: {
+        datasets: [
+          {
+            data: [this.statistic.broken, this.statistic.failed, this.statistic.passed, this.statistic.skipped, this.statistic.unknown],
+            backgroundColor: [
+              'rgb(255, 99, 132)',
+              '#FD725A',
+              '#A6D37B',
+              'rgb(54, 162, 235)',
+              'rgb(54, 162, 235)',
+            ],
+          }
+        ]
+      },
+      options: {
+        aspectRatio: 2.5,
+        cutout: 80,
+      },
+      plugins: [{
+        id: 'text',
+        beforeDraw: function (chart, args, options) {
+          var width = chart.width,
+            height = chart.height,
+            ctx = chart.ctx;
+
+          ctx.restore();
+          var fontSize = (height / 114).toFixed(2);
+          ctx.font = fontSize + "em sans-serif";
+          ctx.textBaseline = "middle";
+
+          var text = component.getPercents(); // Access the component method through the reference
+          var textX = Math.round((width - ctx.measureText(text).width) / 2);
+          var textY = height / 2;
+
+          ctx.fillText(text, textX, textY);
+          ctx.save();
+        }
+      }]
+    });
+  }
+
+  getPercents(): string {
+    return (this.statistic.passed / this.statistic.total * 100).toFixed(0) + '%';
+  }
 }

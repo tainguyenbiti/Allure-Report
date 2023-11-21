@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import Chart from 'chart.js/auto';
-import { IHistoryTrends } from 'src/app/model/history-trend';
+import { Chart } from 'chart.js';
+import { ISeverity } from 'src/app/model/severity';
 import { WidgetsService } from 'src/app/service/widgets.service';
 
 @Component({
@@ -9,68 +9,112 @@ import { WidgetsService } from 'src/app/service/widgets.service';
   styleUrls: ['./severity.component.scss']
 })
 export class SeverityComponent {
-  dataArray: any = [];
-  historyTrends!: IHistoryTrends[];
+  public chart: any;
+  public severity!: ISeverity[];
   constructor(private widgetsService: WidgetsService) { }
-  ngOnInit() {
-    this.widgetsService.getData('history-trend').subscribe(
+  ngOnInit(): void {
+    this.widgetsService.getData('severity').subscribe(
       (response: any) => {
-        this.historyTrends = response;
+        this.severity = response;
+        this.processChartData()
       },
       (error) => {
+        console.error(error);
       }
     )
   }
+  processChartData() {
+    const failedData: number[] = [0, 0, 0, 0, 0];
+    const brokenData: number[] = [0, 0, 0, 0, 0];
+    const passData: number[] = [0, 0, 0, 0, 0];
+    const skipperData: number[] = [0, 0, 0, 0, 0];
+    const unknownData: number[] = [0, 0, 0, 0, 0];
 
-  ngAfterViewInit() {
-    let data: any,
-      options: any,
-      chart: any,
-      ctx: any = document.getElementById('areaChart') as HTMLElement;
-    data = {
-      labels: ['Apples', 'Oranges', 'Mixed Fruit'],
-      datasets: [
-        {
-          label: 'Apples',
-          data: [0, 50, 45, 100],
-          backgroundColor: '#A6D37B',
-          fill: true,
-          lineTension: 0,
-        },
-        {
-          label: 'Oranges',
-          data: [30, 90, 111, 20],
-          backgroundColor: '#FD725A',
-          fill: true,
-          lineTension: 0.2,
-        },
-      ],
-    };
-    options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      title: {
-        display: true,
-        position: 'top',
-        text: 'Apples to Oranges',
-        fontSize: 12,
-        fontColor: '#666',
-      },
-      legend: {
-        display: true,
-        position: 'bottom',
-        labels: {
-          fontColor: '#999',
-          fontSize: 14,
-        },
-      },
-    };
-
-    chart = new Chart(ctx, {
-      type: 'line',
-      data: data,
-      options: options,
+    this.severity.forEach(result => {
+      const index = this.getLabelIndex(result.severity);
+      switch (result.status) {
+        case 'failed':
+          failedData[index]++;
+          break;
+        case 'broken':
+          brokenData[index]++;
+          break;
+        case 'passed':
+          passData[index]++;
+          break;
+        case 'skipper':
+          skipperData[index]++;
+          break;
+        case 'unknown':
+          unknownData[index]++;
+          break;
+        default:
+          break;
+      }
     });
-  }
 
+    this.chart = new Chart("severity", {
+      type: 'bar',
+      data: {
+        labels: ['blocker', 'critical', 'normal', 'minor', 'trivial'],
+        datasets: [
+          {
+            label: 'Failed',
+            data: failedData,
+            borderWidth: 1,
+            backgroundColor: '#FD5A3E'
+          },
+          {
+            label: 'Broken',
+            data: brokenData,
+            borderWidth: 1,
+            backgroundColor: '#FFD050'
+          },
+          {
+            label: 'Pass',
+            data: passData,
+            borderWidth: 1,
+            backgroundColor: '#97CC64'
+          },
+          {
+            label: 'Skipper',
+            data: skipperData,
+            borderWidth: 1,
+            backgroundColor: '#AAAAAA'
+          },
+          {
+            label: 'Unknown',
+            data: unknownData,
+            borderWidth: 1,
+            backgroundColor: '#D35EBE'
+          }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          },
+
+        }
+      },
+    });
+
+  }
+  getLabelIndex(severity: string): number {
+    switch (severity) {
+      case 'blocker':
+        return 0;
+      case 'critical':
+        return 1;
+      case 'normal':
+        return 2;
+      case 'minor':
+        return 3;
+      case 'trivial':
+        return 4;
+      default:
+        return -1;
+    }
+  }
 }

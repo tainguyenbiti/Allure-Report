@@ -1,3 +1,8 @@
-<div class="chart-container">
-    <canvas id="Duration">{{ chart }}</canvas>
-</div>
+<ng-container *ngIf="true; else durationTemplate">
+    <canvas id="Duration"></canvas>
+</ng-container>
+<ng-template #durationTemplate>
+    <div style="padding-top: 50%; text-align: center">
+        There is nothing to show
+    </div>
+</ng-template>

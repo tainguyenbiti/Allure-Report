@@ -35,18 +35,18 @@ export class DoughnutComponent {
           {
             data: [this.statistic.broken, this.statistic.failed, this.statistic.passed, this.statistic.skipped, this.statistic.unknown],
             backgroundColor: [
-              'rgb(255, 99, 132)',
+              '#FFD050',
               '#FD725A',
               '#A6D37B',
-              'rgb(54, 162, 235)',
-              'rgb(54, 162, 235)',
+              '#AAAAAA',
+              '#D35EBE',
             ],
           }
         ]
       },
       options: {
         aspectRatio: 2.5,
-        cutout: 80,
+        // cutout: 80,
       },
       plugins: [{
         id: 'text',

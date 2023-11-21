@@ -1,9 +1,9 @@
-<ng-container
-    *ngIf="historyTrends !== null && historyTrends !== undefined && historyTrends.length > 1; else statusTemplate">
-    <app-severity></app-severity>
+<!-- <ng-container *ngIf="true; else severityTemplate">
+    <canvas id="severity"></canvas>
 </ng-container>
-<ng-template #statusTemplate>
+<ng-template #severityTemplate>
     <div style="padding-top: 50%; text-align: center">
         There is nothing to show
     </div>
-</ng-template>
+</ng-template> -->
+<canvas id="severity"></canvas>

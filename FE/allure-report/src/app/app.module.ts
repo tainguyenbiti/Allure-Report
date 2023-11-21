@@ -11,11 +11,11 @@ import { GraphsComponent } from './component/content/graphs/graphs.component';
 import { TimelineComponent } from './component/content/timeline/timeline.component';
 import { PrimeNGModule } from './primengModule/primeng.module';
 import { DoughnutComponent } from './component/chart/doughnut/doughnut.component';
-import { LineComponent } from './component/chart/line/line.component';
 import { SeverityComponent } from './component/chart/severity/severity.component';
 import { DurationComponent } from './component/chart/duration/duration.component';
 import { RetriesTrendComponent } from './component/chart/retries-trend/retries-trend.component';
 import { CategoriesTrendComponent } from './component/chart/categories-trend/categories-trend.component';
+import { TrendComponent } from './component/chart/trend/trend.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +26,11 @@ import { CategoriesTrendComponent } from './component/chart/categories-trend/cat
     GraphsComponent,
     TimelineComponent,
     DoughnutComponent,
-    LineComponent,
     SeverityComponent,
     DurationComponent,
     RetriesTrendComponent,
     CategoriesTrendComponent,
+    TrendComponent,
   ],
   imports: [
     PrimeNGModule,

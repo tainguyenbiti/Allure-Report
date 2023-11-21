@@ -5,14 +5,7 @@
                 <h2>STATUS</h2>
             </div>
             <div class="widget__content-chart">
-                <ng-container *ngIf="true; else statusTemplate">
-                    <app-doughnut></app-doughnut>
-                </ng-container>
-                <ng-template #statusTemplate>
-                    <div style="padding-top: 50%; text-align: center">
-                        There is nothing to show
-                    </div>
-                </ng-template>
+                <app-doughnut></app-doughnut>
             </div>
         </div>
         <div class="widget island">
@@ -20,14 +13,7 @@
                 <h2>DURATION</h2>
             </div>
             <div class="widget__content-chart">
-                <ng-container *ngIf="true; else durationTemplate">
-                    <app-duration></app-duration>
-                </ng-container>
-                <ng-template #durationTemplate>
-                    <div style="padding-top: 50%; text-align: center">
-                        There is nothing to show
-                    </div>
-                </ng-template>
+                <app-duration></app-duration>
             </div>
         </div>
         <div class="widget island">
@@ -50,14 +36,7 @@
                 <h2>TREND</h2>
             </div>
             <div class="widget__content-chart">
-                <ng-container *ngIf="false; else statusTemplate">
-
-                </ng-container>
-                <ng-template #statusTemplate>
-                    <div style="padding-top: 50%; text-align: center">
-                        There is nothing to show
-                    </div>
-                </ng-template>
+                <app-trend></app-trend>
             </div>
         </div>
     </div>
@@ -67,14 +46,7 @@
                 <h2>SEVERITY</h2>
             </div>
             <div class="widget__content-chart">
-                <ng-container *ngIf="true; else statusTemplate">
-                    <app-severity></app-severity>
-                </ng-container>
-                <ng-template #statusTemplate>
-                    <div style="padding-top: 50%; text-align: center">
-                        There is nothing to show
-                    </div>
-                </ng-template>
+                <app-severity></app-severity>
             </div>
         </div>
         <div class="widget island">

@@ -1,1 +1,10 @@
-<p>timeline works!</p>
+<ng-container *ngIf="true; else timelineTemplate">
+    <canvas id="timeline" width="1300" height="100"></canvas>
+    <ng-container *ngFor="let item of convertedData">
+    </ng-container>
+</ng-container>
+<ng-template #timelineTemplate>
+    <div style="padding-top: 50%; text-align: center">
+        There is nothing to show
+    </div>
+</ng-template>

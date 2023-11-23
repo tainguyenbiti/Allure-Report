@@ -41,10 +41,8 @@ export class DurationComponent {
 
     this.duration.forEach(result => {
       const durationInSeconds = Math.ceil(result.time.duration / 1000);
-
       countByRange[durationInSeconds] = (countByRange[durationInSeconds] || 0) + 1;
     });
-
     const maxDurationInMilliseconds = Math.max(...this.duration.map(result => result.time.duration));
     const maxDurationInSeconds = Math.ceil(maxDurationInMilliseconds / 1000);
 

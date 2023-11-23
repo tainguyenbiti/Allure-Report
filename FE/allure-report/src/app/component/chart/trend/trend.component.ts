@@ -15,12 +15,13 @@ export class TrendComponent {
     this.widgetsService.getData('history-trend').subscribe(
       (response: any) => {
         this.historyTrends = response;
+        this.createChart();
       },
       (error) => {
       }
     )
   }
-  ngAfterViewInit() {
+  createChart() {
     let data: any,
       options: any,
       chart: any,

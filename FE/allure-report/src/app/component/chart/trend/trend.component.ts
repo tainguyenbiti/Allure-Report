@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import Chart from 'chart.js/auto';
-import { IHistoryTrends } from 'src/app/model/history-trend';
+import { IHistoryTrends, historyTrends } from 'src/app/model/history-trend';
 import { WidgetsService } from 'src/app/service/widgets.service';
 @Component({
   selector: 'app-trend',
@@ -9,67 +9,99 @@ import { WidgetsService } from 'src/app/service/widgets.service';
 })
 export class TrendComponent {
   dataArray: any = [];
-  historyTrends!: IHistoryTrends[];
+  historyTrends: IHistoryTrends[] = historyTrends.sort((a, b) => {
+    return a.buildOrder - b.buildOrder;
+  });
   constructor(private widgetsService: WidgetsService) { }
-  ngOnInit() {
-    this.widgetsService.getData('history-trend').subscribe(
-      (response: any) => {
-        this.historyTrends = response;
-        this.createChart();
-      },
-      (error) => {
-      }
-    )
+  ngOnInit(): void {
+    this.createChart();
   }
   createChart() {
+    const buildOrder: any = [];
+    const dataArrayPass: any = [];
+    const dataArrayFailed: any = [];
+    const dataArrayBroken: any = [];
+    const dataArraySkipped: any = [];
+    const dataArrayUnknown: any = [];
+
+    this.historyTrends.forEach((element: IHistoryTrends) => {
+      buildOrder.push('#' + element.buildOrder);
+
+      // dataArrayFailed.push(element.data.failed);
+      // dataArrayBroken.push(element.data.broken + element.data.failed);
+      // dataArraySkipped.push(element.data.skipped + element.data.failed + element.data.broken);
+      // dataArrayUnknown.push(element.data.unknown + element.data.skipped + element.data.failed + element.data.broken)
+      // dataArrayPass.push(element.data.passed + element.data.unknown + element.data.skipped + element.data.failed + element.data.broken);
+
+      dataArrayFailed.push(element.data.failed);
+      dataArrayBroken.push(element.data.broken);
+      dataArraySkipped.push(element.data.skipped);
+      dataArrayUnknown.push(element.data.unknown)
+      dataArrayPass.push(element.data.passed);
+
+    })
+    console.log('fail', dataArrayFailed);
+    console.log(dataArrayPass);
+
     let data: any,
       options: any,
-      chart: any,
-      ctx: any = document.getElementById('areaChart') as HTMLElement;
+      chart: any;
     data = {
-      labels: ['Apples', 'Oranges', 'Mixed Fruit'],
+      labels: buildOrder,
       datasets: [
         {
-          label: 'Apples',
-          data: [0, 50, 45, 100],
-          backgroundColor: '#A6D37B',
-          fill: true,
-          lineTension: 0,
-        },
-        {
-          label: 'Oranges',
-          data: [30, 90, 111, 20],
+          label: 'failed',
+          data: dataArrayFailed, // Cumulative values for failed
           backgroundColor: '#FD725A',
           fill: true,
-          lineTension: 0.2,
+          spanGaps: true,
+        },
+        {
+          label: 'skipped',
+          // data: [0, 4, 3, 4, 0, 8],
+          data: dataArraySkipped,
+          backgroundColor: 'gray',
+          fill: true,
+          spanGaps: true,
+        },
+        {
+          label: 'broken',
+          // data: [0, 4, 2, 1, 0, 0] + [0, 0, 1, 2, 2, 0],
+          data: dataArrayBroken,
+
+          backgroundColor: 'black',
+          fill: true,
+          spanGaps: true,
+        },
+        {
+          label: 'broken',
+          data: dataArrayUnknown,
+          backgroundColor: 'pink',
+          fill: true,
+          spanGaps: true,
+        },
+        {
+          label: 'passed',
+          data: dataArrayPass,
+          backgroundColor: '#A6D37B',
+          fill: true,
+          spanGaps: true,
         },
       ],
     };
     options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      title: {
-        display: true,
-        position: 'top',
-        text: 'Apples to Oranges',
-        fontSize: 12,
-        fontColor: '#666',
-      },
-      legend: {
-        display: true,
-        position: 'bottom',
-        labels: {
-          fontColor: '#999',
-          fontSize: 14,
-        },
-      },
-
+      scales: {
+        y: {
+          suggestedMin: 0,
+          suggestedMax: 8,
+        }
+      }
     };
-
-    chart = new Chart(ctx, {
+    chart = new Chart('areaChart', {
       type: 'line',
       data: data,
       options: options,
     });
+
   }
 }

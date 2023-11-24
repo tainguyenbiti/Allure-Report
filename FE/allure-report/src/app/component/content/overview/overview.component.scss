@@ -10,6 +10,11 @@
 
       .widget__flex-line {
         display: flex;
+        .summary-widget__chart {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
         .summary-widget__stats {
           display: flex;
           justify-content: center;

@@ -4,8 +4,30 @@
             <div class="widget__title">
                 <h2>STATUS</h2>
             </div>
-            <div class="widget__content-chart">
-                <app-doughnut></app-doughnut>
+            <div class="widget__content-chart-status">
+                <div class="chart"><app-doughnut></app-doughnut></div>
+                <div class="widget__content-explain">
+                    <div class="status">
+                        <div class="failed" style="background-color: #FD5A3E; width: 30px; margin: 2px;"></div>
+                        <div> Failed</div>
+                    </div>
+                    <div class="status">
+                        <div class="broken" style="background-color: #FFD050; width: 30px; margin: 2px;"></div>
+                        <div>Broken</div>
+                    </div>
+                    <div class="status">
+                        <div class="passed" style="background-color: #86E22F; width: 30px; margin: 2px;"></div>
+                        <div>Passed</div>
+                    </div>
+                    <div class="status">
+                        <div class="skipped" style="background-color: #AAAAAA; width: 30px; margin: 2px;"></div>
+                        <div>Skipped</div>
+                    </div>
+                    <div class="status">
+                        <div class="unknown" style="background-color: #D35EBE; width: 30px; margin: 2px;"></div>
+                        <div>Unknown</div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="widget island">
@@ -21,8 +43,8 @@
                 <h2>RETRIES TREND</h2>
             </div>
             <div class="widget__content-chart">
-                <ng-container *ngIf="false; else statusTemplate">
-
+                <ng-container *ngIf="true; else statusTemplate">
+                    <app-retries-trend></app-retries-trend>
                 </ng-container>
                 <ng-template #statusTemplate>
                     <div style="padding-top: 50%; text-align: center">
@@ -54,10 +76,10 @@
                 <h2>DURATION TREND</h2>
             </div>
             <div class="widget__content-chart">
-                <ng-container *ngIf="false; else statusTemplate">
-
+                <ng-container *ngIf="true; else durationTrendTemplate">
+                    <app-duration-trend></app-duration-trend>
                 </ng-container>
-                <ng-template #statusTemplate>
+                <ng-template #durationTrendTemplate>
                     <div style="padding-top: 50%; text-align: center">
                         There is nothing to show
                     </div>
@@ -69,8 +91,8 @@
                 <h2>CATEGORIES TREND</h2>
             </div>
             <div class="widget__content-chart">
-                <ng-container *ngIf="false; else statusTemplate">
-
+                <ng-container *ngIf="true; else statusTemplate">
+                    <app-categories-trend></app-categories-trend>
                 </ng-container>
                 <ng-template #statusTemplate>
                     <div style="padding-top: 50%; text-align: center">

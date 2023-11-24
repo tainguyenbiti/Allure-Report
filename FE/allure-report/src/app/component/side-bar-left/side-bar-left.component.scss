@@ -1,7 +1,7 @@
 .sidebar {
   width: 180px;
   height: 100%;
-  background: #4b4276;
+  background: #343434;
   position: fixed;
   .side-nav-head {
     margin: 0 auto;
@@ -33,4 +33,8 @@
     display: inline-block;
     width: 10px;
   }
+}
+.active {
+  border-right: 5px solid #fff;
+  margin-right: 1px;
 }

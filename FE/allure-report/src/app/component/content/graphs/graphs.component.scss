@@ -6,6 +6,18 @@
       border: 1px solid #e0e4e8;
       margin: 10px 10px 0;
       padding: 10px 10px 0;
+      .widget__content-chart-status {
+        display: flex;
+        .chart {
+          width: 70%;
+        }
+        .widget__content-explain {
+          width: 30%;
+          .status {
+            display: flex;
+          }
+        }
+      }
     }
   }
 }

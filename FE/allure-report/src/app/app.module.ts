@@ -16,6 +16,7 @@ import { DurationComponent } from './component/chart/duration/duration.component
 import { RetriesTrendComponent } from './component/chart/retries-trend/retries-trend.component';
 import { CategoriesTrendComponent } from './component/chart/categories-trend/categories-trend.component';
 import { TrendComponent } from './component/chart/trend/trend.component';
+import { DurationTrendComponent } from './component/chart/duration-trend/duration-trend.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TrendComponent } from './component/chart/trend/trend.component';
     RetriesTrendComponent,
     CategoriesTrendComponent,
     TrendComponent,
+    DurationTrendComponent,
   ],
   imports: [
     PrimeNGModule,

@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./side-bar-left.component.scss']
 })
 export class SideBarLeftComponent {
-
+  active = false;
+  activeClass() {
+    this.active = !this.active;
+  }
 }

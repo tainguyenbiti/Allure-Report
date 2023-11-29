@@ -27,22 +27,14 @@ export class TrendComponent {
     this.historyTrends.forEach((element: IHistoryTrends) => {
       buildOrder.push('#' + element.buildOrder);
 
-      // dataArrayFailed.push(element.data.failed);
-      // dataArrayBroken.push(element.data.broken + element.data.failed);
-      // dataArraySkipped.push(element.data.skipped + element.data.failed + element.data.broken);
-      // dataArrayUnknown.push(element.data.unknown + element.data.skipped + element.data.failed + element.data.broken)
-      // dataArrayPass.push(element.data.passed + element.data.unknown + element.data.skipped + element.data.failed + element.data.broken);
-
       dataArrayFailed.push(element.data.failed);
-      dataArrayBroken.push(element.data.broken);
-      dataArraySkipped.push(element.data.skipped);
-      dataArrayUnknown.push(element.data.unknown)
-      dataArrayPass.push(element.data.passed);
+      dataArrayBroken.push(element.data.broken + element.data.failed);
+      dataArraySkipped.push(element.data.skipped + element.data.failed + element.data.broken);
+      dataArrayUnknown.push(element.data.unknown + element.data.skipped + element.data.failed + element.data.broken)
+      dataArrayPass.push(element.data.passed + element.data.unknown + element.data.skipped + element.data.failed + element.data.broken);
+
 
     })
-    console.log('fail', dataArrayFailed);
-    console.log(dataArrayPass);
-
     let data: any,
       options: any,
       chart: any;
@@ -58,7 +50,6 @@ export class TrendComponent {
         },
         {
           label: 'skipped',
-          // data: [0, 4, 3, 4, 0, 8],
           data: dataArraySkipped,
           backgroundColor: 'gray',
           fill: true,
@@ -66,9 +57,7 @@ export class TrendComponent {
         },
         {
           label: 'broken',
-          // data: [0, 4, 2, 1, 0, 0] + [0, 0, 1, 2, 2, 0],
           data: dataArrayBroken,
-
           backgroundColor: 'black',
           fill: true,
           spanGaps: true,
@@ -102,6 +91,5 @@ export class TrendComponent {
       data: data,
       options: options,
     });
-
   }
 }

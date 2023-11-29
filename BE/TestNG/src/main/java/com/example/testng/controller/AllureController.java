@@ -27,4 +27,15 @@ public class AllureController {
         // Trả về nội dung JSON
         return ResponseEntity.ok(jsonData);
     }
+    @GetMapping(value = "/timeline", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getDataTimeline() throws IOException {
+        // Đọc nội dung từ tệp JSON
+        Resource resource = new ClassPathResource("allure-report/data/timeline.json");
+        InputStream inputStream = resource.getInputStream();
+        byte[] bdata = FileCopyUtils.copyToByteArray(inputStream);
+        String jsonData = new String(bdata, StandardCharsets.UTF_8);
+
+        // Trả về nội dung JSON
+        return ResponseEntity.ok(jsonData);
+    }
 }

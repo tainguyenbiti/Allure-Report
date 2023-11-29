@@ -17,6 +17,7 @@ import { RetriesTrendComponent } from './component/chart/retries-trend/retries-t
 import { CategoriesTrendComponent } from './component/chart/categories-trend/categories-trend.component';
 import { TrendComponent } from './component/chart/trend/trend.component';
 import { DurationTrendComponent } from './component/chart/duration-trend/duration-trend.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DurationTrendComponent } from './component/chart/duration-trend/duratio
     PrimeNGModule,
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

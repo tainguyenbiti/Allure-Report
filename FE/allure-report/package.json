@@ -21,6 +21,8 @@
     "@angular/router": "^16.2.0",
     "@types/moment": "^2.13.0",
     "chart.js": "^4.4.0",
+    "highcharts": "^11.2.0",
+    "highcharts-angular": "^4.0.0",
     "luxon": "^3.4.4",
     "primeng": "^16.4.2",
     "rxjs": "~7.8.0",

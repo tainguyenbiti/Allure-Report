@@ -18,10 +18,9 @@ export class TimelineComponent {
   ngOnInit() {
     this.widgetsService.getData('timeline').subscribe(
       (response: any) => {
+        console.log(response);
         this.sortNodesByTime(response);
         this.convertedData = this.convertTime(this.extractTimeValues(response));
-        console.log(this.convertedData);
-
         this.createChart()
       },
       (error) => {
@@ -81,16 +80,18 @@ export class TimelineComponent {
       if (remainingMilliseconds === 0) {
         return `${seconds}s`;
       }
-      return `${seconds}s ${remainingMilliseconds}ms`;
+      return `${seconds}s ${remainingMilliseconds.toFixed(0)}ms`;
     }
     const data = this.convertedData;
     const minStartTime = Math.min(...data.map(item => item.startTime));
     const maxStopTime = Math.max(...data.map(item => item.stopTime));
     const range = (maxStopTime - minStartTime) / 12;
+    const percentMaxDuration = (maxStopTime - minStartTime) / 200;
+
     const dataSets = data.map(item => {
       return {
         label: item.name,
-        data: [[item.startTime, item.stopTime]],
+        data: (item.stopTime - item.startTime > 10) ? [[item.startTime, item.stopTime]] : [[item.startTime, item.startTime + percentMaxDuration]],
         backgroundColor: (item.status === "passed") ? "#A6D37B" : "#FD725A"
       };
     });
@@ -104,6 +105,36 @@ export class TimelineComponent {
         responsive: false,
         indexAxis: 'y',
         plugins: {
+          tooltip: {
+            callbacks: {
+              // label: (tooltipItem) => {
+              //   data.forEach(dataItem => {
+              //     const datasetLabel = data[tooltipItem.datasetIndex].label || '';
+              //     const startTime = data[tooltipItem.datasetIndex].data[0][0];
+              //     const stopTime = data[tooltipItem.datasetIndex].data[0][1];
+              //     if (stopTime - startTime <= 100) {
+              //       return `${datasetLabel}`
+              //     }
+              //     return `${datasetLabel}: ${formatTime(startTime)} - ${formatTime(stopTime)}`;
+              //   })
+
+              // }
+              label: function (context) {
+                let label = context.dataset.label || '';
+
+                if (label) {
+                  label += ': ';
+                }
+                if (context.parsed.y !== null) {
+                  const datasetIndex = context.datasetIndex;
+                  const dataItem = data[datasetIndex];
+                  label += `${formatTime(dataItem.startTime)} - ${formatTime(dataItem.stopTime)}`;
+                }
+                return label;
+              }
+
+            }
+          },
           legend: {
             position: 'top',
             display: false,
@@ -123,7 +154,8 @@ export class TimelineComponent {
               }
             } as any,
           }
-        }
+        },
+
       }
     });
 

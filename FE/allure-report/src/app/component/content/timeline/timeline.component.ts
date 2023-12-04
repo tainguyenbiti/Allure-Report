@@ -91,7 +91,7 @@ export class TimelineComponent {
     const dataSets = data.map(item => {
       return {
         label: item.name,
-        data: (item.stopTime - item.startTime > 10) ? [[item.startTime, item.stopTime]] : [[item.startTime, item.startTime + percentMaxDuration]],
+        data: (item.stopTime - item.startTime > percentMaxDuration) ? [[item.startTime, item.stopTime]] : [[item.startTime, item.startTime + percentMaxDuration]],
         backgroundColor: (item.status === "passed") ? "#A6D37B" : "#FD725A"
       };
     });

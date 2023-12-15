@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Chart } from 'chart.js';
 import { IDurationTrend, durationTrend } from 'src/app/model/duration-trend';
+import { WidgetsService } from 'src/app/service/widgets.service';
 
 @Component({
   selector: 'app-duration-trend',
@@ -12,8 +13,18 @@ export class DurationTrendComponent {
     return a.buildOrder - b.buildOrder;
   });
   chart: any;
+  public errorAPI: boolean = true;
+  constructor(private widgetsService: WidgetsService) { }
   ngOnInit(): void {
-    this.createChart();
+    this.widgetsService.getData('duration').subscribe(
+      (response: any) => {
+        this.createChart();
+      },
+      (error) => {
+        console.error(error);
+        this.errorAPI = false;
+      }
+    )
 
   }
   createChart() {

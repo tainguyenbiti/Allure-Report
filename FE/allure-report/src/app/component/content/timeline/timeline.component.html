@@ -1,3 +1,5 @@
+<button (click)="exportData()">Export to Excel</button>
+
 <ng-container *ngIf="true; else timelineTemplate">
     <canvas id="timeline" width="1300" height="100"></canvas>
     <ng-container *ngFor="let item of convertedData">

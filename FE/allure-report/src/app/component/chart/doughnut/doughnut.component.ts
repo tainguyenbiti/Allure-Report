@@ -11,6 +11,7 @@ import { WidgetsService } from 'src/app/service/widgets.service';
 export class DoughnutComponent {
   public chart: any;
   public statistic!: IStatistic;
+  public errorAPI: boolean = true;
 
   constructor(private widgetsService: WidgetsService) { }
 
@@ -19,6 +20,9 @@ export class DoughnutComponent {
       (response: any) => {
         this.statistic = response.statistic;
         this.createChart();
+        if (!this.statistic) {
+          this.errorAPI = false;
+        }
       },
       (error) => {
         console.error('Message' + error);

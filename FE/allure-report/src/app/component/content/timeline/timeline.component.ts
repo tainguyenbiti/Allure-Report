@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Chart } from 'chart.js';
 import { TestResult } from 'src/app/model/test-result';
+import { ExcelService } from 'src/app/service/excel.service';
 import { WidgetsService } from 'src/app/service/widgets.service';
-
 
 @Component({
   selector: 'app-timeline',
@@ -14,14 +14,32 @@ export class TimelineComponent {
   testResult!: TestResult;
   totalTime!: number;
   convertedData!: any[];
-  constructor(private widgetsService: WidgetsService) { }
+  dataToExport: any = [];
+  constructor(private widgetsService: WidgetsService, private excelService: ExcelService) { }
+  exportData(): void {
+    if (this.convertedData.length > 0) {
+      this.convertedData.forEach((data: any) => {
+        this.dataToExport.push({
+          "Test name": data.name,
+          "Status": data.status,
+          "Duration": data.stopTime - data.startTime,
+        });
+      });
+      this.excelService.exportToExcel(this.dataToExport, 'exported_data');
+    }
+  }
   ngOnInit() {
     this.widgetsService.getData('timeline').subscribe(
       (response: any) => {
         console.log(response);
+
         this.sortNodesByTime(response);
+
+        console.log(this.extractTimeValues(response));
+
         this.convertedData = this.convertTime(this.extractTimeValues(response));
         this.createChart()
+        console.log(this.convertedData);
       },
       (error) => {
         console.error(error);
@@ -55,7 +73,6 @@ export class TimelineComponent {
         this.extractTimeValues(child, timeValues);
       }
     }
-
     return timeValues;
   }
   convertTime(data: any[]): any[] {
@@ -107,21 +124,8 @@ export class TimelineComponent {
         plugins: {
           tooltip: {
             callbacks: {
-              // label: (tooltipItem) => {
-              //   data.forEach(dataItem => {
-              //     const datasetLabel = data[tooltipItem.datasetIndex].label || '';
-              //     const startTime = data[tooltipItem.datasetIndex].data[0][0];
-              //     const stopTime = data[tooltipItem.datasetIndex].data[0][1];
-              //     if (stopTime - startTime <= 100) {
-              //       return `${datasetLabel}`
-              //     }
-              //     return `${datasetLabel}: ${formatTime(startTime)} - ${formatTime(stopTime)}`;
-              //   })
-
-              // }
               label: function (context) {
                 let label = context.dataset.label || '';
-
                 if (label) {
                   label += ': ';
                 }
@@ -132,7 +136,6 @@ export class TimelineComponent {
                 }
                 return label;
               }
-
             }
           },
           legend: {

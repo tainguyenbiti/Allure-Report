@@ -86,7 +86,7 @@ export class TrendComponent {
         }
       }
     };
-    chart = new Chart('areaChart', {
+    chart = new Chart('trendChart', {
       type: 'line',
       data: data,
       options: options,

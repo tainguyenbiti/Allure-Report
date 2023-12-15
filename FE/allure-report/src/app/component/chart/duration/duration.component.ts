@@ -15,12 +15,16 @@ export class DurationComponent {
   countArrays: number[] = [];
   public chart: any;
   duration!: IDuration[];
+  public errorAPI: boolean = true;
   constructor(private widgetsService: WidgetsService) { }
   ngOnInit(): void {
     this.widgetsService.getData('duration').subscribe(
       (response: any) => {
         this.duration = response;
         this.createChart()
+        if (!this.duration) {
+          this.errorAPI = false;
+        }
       },
       (error) => {
         console.error(error);

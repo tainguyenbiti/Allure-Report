@@ -1,0 +1,12 @@
+.btn-export {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  button {
+    padding: 10px;
+    border-radius: 5px;
+    border: aliceblue;
+    margin: 5px;
+    cursor: pointer;
+  }
+}

@@ -14,18 +14,18 @@ export class TimelineComponent {
   testResult!: TestResult;
   totalTime!: number;
   convertedData!: any[];
-  dataToExport: any = [];
   constructor(private widgetsService: WidgetsService, private excelService: ExcelService) { }
   exportData(): void {
+    const dataToExport: any = [];
     if (this.convertedData.length > 0) {
       this.convertedData.forEach((data: any) => {
-        this.dataToExport.push({
+        dataToExport.push({
           "Test name": data.name,
           "Status": data.status,
           "Duration": data.stopTime - data.startTime,
         });
       });
-      this.excelService.exportToExcel(this.dataToExport, 'exported_data');
+      this.excelService.exportToExcel(dataToExport, 'exported_data');
     }
   }
   ngOnInit() {

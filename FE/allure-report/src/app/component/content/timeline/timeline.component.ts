@@ -31,15 +31,11 @@ export class TimelineComponent {
   ngOnInit() {
     this.widgetsService.getData('timeline').subscribe(
       (response: any) => {
-        console.log(response);
-
         this.sortNodesByTime(response);
-
-        console.log(this.extractTimeValues(response));
-
         this.convertedData = this.convertTime(this.extractTimeValues(response));
         this.createChart()
         console.log(this.convertedData);
+
       },
       (error) => {
         console.error(error);
@@ -82,7 +78,7 @@ export class TimelineComponent {
         name: item.name,
         status: item.status,
         startTime: index === 0 ? 0 : item.startTime - data[0].startTime,
-        stopTime: index === 0 ? data[0].stopTime - data[0].startTime : item.stopTime - data[0].stopTime,
+        stopTime: index === 0 ? data[0].stopTime - data[0].startTime : item.stopTime - data[0].startTime,
       };
       new_array.push(new_item);
     });
